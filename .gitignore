@@ -27,3 +27,4 @@ ontap*.yaml
 /logs
 # no db
 /db
+data/playbooks/artifacts/*
