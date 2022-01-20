@@ -1,0 +1,97 @@
+categories:
+  - name: Default
+    icon: bars
+  - name: CloudManager
+    icon: cloud
+roles:
+  - name: admin
+    groups:
+      - local/admins
+      - ldap/Domain Admins
+  - name: public
+    groups: []
+forms:
+  - name: CloudManager Demo
+    help: |
+      This form starts the `cloudmanager_demo.yaml` playbook.
+
+      It will setup a couple of NetApp storage services.
+    roles:
+      - admin
+    description: Setup a couple of NetApp storage services in CloudManager.
+    icon: cloud
+    categories:
+      - CloudManager
+    tileClass: has-background-info-light
+    playbook: cloudmanager_demo.yaml
+    type: ansible
+    fields:
+      - type: text
+        name: envname
+        label: Environment names (comma separated)
+        default: myenv21,myenv22
+        required: true
+      - type: enum
+        name: deploy_or_delete
+        label: Deploy or Delete?
+        default: deploy
+        values:
+          - deploy
+          - delete
+        required: true
+        noOutput: true
+      - type: expression
+        name: state
+        default: ""
+        label: State
+        expression: "'$(deploy_or_delete)' == 'delete' ? 'absent' : 'present'"
+        hide: true
+      - type: enum
+        name: location
+        label: Location
+        default: westus
+        values:
+          - westus
+          - westus
+        required: true
+      - type: expression
+        name: subscription_id
+        label: subscription_id
+        expression: "'1'"
+        hide: true
+      - type: expression
+        name: subnet_id
+        label: subnet_id
+        expression: "'subnet1'"
+        hide: true
+      - type: expression
+        name: vnet_id
+        label: vnet_id
+        expression: "'Vnetid1'"
+        hide: true
+      - type: expression
+        name: cidr
+        label: cidr
+        expression: "'10.0.0.0/24'"
+        hide: true
+      - type: expression
+        name: vnet_resource_group
+        label: vnet_resource_group
+        expression: "'rg'"
+        hide: true
+      - type: expression
+        name: resource_group
+        label: resource_group
+        expression: "'myrg'"
+        hide: true
+      - type: expression
+        name: writing_speed_state
+        label: writing_speed_state
+        expression: "'NORMAL'"
+        hide: true
+      - type: expression
+        name: cloudmanager_auth
+        expression: "'CloudManager'"
+        label: CloudManager Credentials
+        asCredential: true
+        hide: true
