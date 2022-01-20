@@ -6,19 +6,19 @@
       loop: "{{ envname.split(',') }}"
       netapp.cloudmanager.na_cloudmanager_cvo_azure:
         state: "{{ state }}"
-        refresh_token: "{{ cloudmanager_auth.password}}"
+        refresh_token: "{{ cloudmanager_auth.password }}"
         name: "{{ item }}"
         location: "{{ location }}"
-        subscription_id: "1"
-        subnet_id: subnet1
-        vnet_id: Vnetid1
-        cidr: "10.0.0.0/24"
+        subscription_id: "{{ subscription_id }}"
+        subnet_id: "{{ subnet_id }}"
+        vnet_id: "{{ vnet_id }}"
+        cidr: "{{ cidr }}"
         svm_password: P@assword!1
-        client_id: "{{ cloudmanager_auth.user}}"
-        writing_speed_state: NORMAL
+        client_id: "{{ cloudmanager_auth.user }}"
+        writing_speed_state: "{{ writing_speed_state }}"
         allow_deploy_in_existing_rg: True
-        vnet_resource_group: rg
-        resource_group: myrg
+        vnet_resource_group: "{{ vnet_resource_group }}"
+        resource_group: "{{ resource_group }}"
         feature_flags:
           simulator: True
       
